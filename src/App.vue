@@ -1,6 +1,7 @@
 <script setup>
 //
 import ChildComp from './ChildComp.vue'
+import TemplateChildComp from './TemplateChildComp.vue';
 import {ref, reactive,computed, onMounted,watch} from 'vue'
 // --> reactive state in vue is created with either ref() or reactive()
 // ref is used for strings and other primitive types 
@@ -130,6 +131,11 @@ watch(todoId,fetch_data)
 <!-- we can receive messages from the child component by emiting messages from the child-->
 <!-- we catch the emitted messages from the cild component by reacting to the event that is emitted-->
 <ChildComp @response="(msg)=>console.log(msg)" text="that received a prop by binding the value" :msg="fav_language"/>
+
+<!-- we can pass template fragments to a child component, if the child component uses the slot element-->
+<TemplateChildComp><p>{{ fav_language }}</p></TemplateChildComp>
+<!-- if we don't pass any template, the default fallback elements in the child will be used-->
+<TemplateChildComp/>
 </template>
 
 <style>
